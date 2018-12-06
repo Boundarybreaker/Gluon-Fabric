@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "space.bbkr.gluon.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+      "MixinLoomContainer",
+      "MixinBannerTooltip",
+      "MixinPlayerEntity"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

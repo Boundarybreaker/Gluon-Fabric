@@ -1,0 +1,11 @@
+{
+  "id": "gluon",
+  "name": "Gluon",
+  "version": "1.0.0",
+  "side": "universal",
+  "initializer": "space.bbkr.gluon.Gluon",
+  "mixins": {
+    "client": "gluon.client.json",
+    "common": "gluon.common.json"
+  }
+}
