@@ -16,8 +16,6 @@ public class Gluon implements ModInitializer {
     public static final Block UPSIDE_DOWN_ANVIL = register("upside_down_anvil", new UpsideDownAnvilBlock(Block.Settings.of(Material.ANVIL)), ItemGroup.DECORATIONS);
     public static final Item TITLE_SCROLL = register("title_scroll", new ItemTitleScroll(new Item.Settings().itemGroup(ItemGroup.MISC)));
     public static final Item JELLY = register("jelly", new Item(new Item.Settings().itemGroup(ItemGroup.FOOD)));
-    public static final RecipeSerializers.Dummy<AddJellyRecipe> JELLY_ADDING = (RecipeSerializers.Dummy)RecipeSerializers.register(new RecipeSerializers.Dummy("crafting_special_jellyadding", AddJellyRecipe::new));
-
 
     public static Block register(String name, Block block, ItemGroup tab) {
         Registry.register(Registry.BLOCK, "gluon:" + name, block);
@@ -34,6 +32,6 @@ public class Gluon implements ModInitializer {
 
     @Override
     public void onInitialize() {
-
+        RecipeSerializers.register(AddJellyRecipe.SERIALIZER);
     }
 }
