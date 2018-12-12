@@ -127,7 +127,7 @@ public class BlockIngredient implements Predicate<BlockState> {
 			Identifier id;
 			if (json.has("block")) {
 				id = new Identifier(JsonHelper.getString(json, "block"));
-				Block block = Registry.BLOCKS.get(id);
+				Block block = Registry.BLOCK.get(id);
 				if (block == null) {
 					throw new JsonSyntaxException("Unknown block '" + id + "'");
 				} else {
@@ -186,7 +186,7 @@ public class BlockIngredient implements Predicate<BlockState> {
 
 		public JsonObject toJson() {
 			JsonObject json = new JsonObject();
-			json.addProperty("item", Registry.ITEMS.getId(this.block.getItem()).toString());
+			json.addProperty("item", Registry.ITEM.getId(this.block.getItem()).toString());
 			return json;
 		}
 	}

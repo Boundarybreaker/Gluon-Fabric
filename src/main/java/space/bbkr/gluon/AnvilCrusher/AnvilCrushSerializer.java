@@ -22,7 +22,7 @@ public class AnvilCrushSerializer {
 		}
 
 		String result = JsonHelper.getString(json, "result_block");
-		Block resultBlock = Registry.BLOCKS.get(new Identifier(result));
+		Block resultBlock = Registry.BLOCK.get(new Identifier(result));
 		Identifier resultLoot = new Identifier(JsonHelper.getString(json, "result_loot"));
 		if (resultLoot != LootTables.EMPTY) {
 			return new AnvilCrush(id, input, resultBlock, resultLoot);

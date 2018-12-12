@@ -7,7 +7,7 @@ import net.minecraft.entity.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Facing;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.minecraft.world.loot.LootSupplier;
 import net.minecraft.world.loot.context.LootContext;
@@ -24,9 +24,9 @@ public class UpsideDownAnvilBlock extends AnvilBlock {
 	@Override
 	public void method_10127(World world, BlockPos pos, BlockState state, BlockState landState) {
 		world.fireWorldEvent(1031, pos, 0);
-		BlockPos landedOnPos = pos.offset(Facing.DOWN);
+		BlockPos landedOnPos = pos.offset(Direction.DOWN.DOWN);
 //		Block landedBlock = world.getBlockState(landedOnPos).getBlock();
-		AnvilCrush setup = AnvilCrusherManager.get(world, pos.offset(Facing.DOWN)); //TODO: mixin a getSetupManager?
+		AnvilCrush setup = AnvilCrusherManager.get(world, pos.offset(Direction.DOWN)); //TODO: mixin a getSetupManager?
 		System.out.println(setup);
 		if (setup != null) {
 			Block blockResult = setup.getBlockOutput();

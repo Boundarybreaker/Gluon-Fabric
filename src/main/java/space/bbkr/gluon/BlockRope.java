@@ -12,8 +12,8 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Facing;
-import net.minecraft.util.shape.VoxelShapeContainer;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.ViewableWorld;
@@ -32,7 +32,7 @@ public class BlockRope extends Block {
 	}
 
 	@Override
-	public VoxelShapeContainer getBoundingShape(BlockState state, BlockView view, BlockPos shape) {
+	public VoxelShape getBoundingShape(BlockState state, BlockView view, BlockPos shape) {
 		return Block.createCubeShape(6.0,0.0,6.0,10.0,16.0,10.0);
 	}
 	
@@ -73,7 +73,7 @@ public class BlockRope extends Block {
 
 
 	@Override
-	public BlockState getRenderingState(BlockState state, Facing facing, BlockState newState, IWorld world, BlockPos pos, BlockPos posFrom) {
+	public BlockState getRenderingState(BlockState state, Direction facing, BlockState newState, IWorld world, BlockPos pos, BlockPos posFrom) {
 		if (!state.canPlaceAt(world, pos) || !state.get(EXTENDED)) {
 			world.getBlockTickScheduler().schedule(pos, this, 2);
 			return super.getRenderingState(state, facing, newState, world, pos, posFrom);
@@ -86,8 +86,8 @@ public class BlockRope extends Block {
 		if (!state.canPlaceAt(world, pos)) {
 			world.breakBlock(pos, true);
 		}
-		if (world.getBlockState(pos.offset(Facing.DOWN)).isAir() && !state.get(EXTENDED)) {
-			world.setBlockState(pos.offset(Facing.DOWN), this.getDefaultState());
+		if (world.getBlockState(pos.offset(Direction.DOWN)).isAir() && !state.get(EXTENDED)) {
+			world.setBlockState(pos.offset(Direction.DOWN), this.getDefaultState());
 			world.setBlockState(pos, state.with(EXTENDED, true));
 		}
 	}
@@ -100,7 +100,7 @@ public class BlockRope extends Block {
 	}
 
 	public boolean canPlaceAt(BlockState state, ViewableWorld world, BlockPos pos) {
-		BlockPos checkPos = pos.offset(Facing.UP);
+		BlockPos checkPos = pos.offset(Direction.UP);
 		BlockState checkBlock = world.getBlockState(checkPos);
 		return !checkBlock.isAir() && (checkBlock.isFullBoundsCubeForCulling() || checkBlock.getBlock() == Gluon.ROPE);
 	}
