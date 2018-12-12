@@ -26,8 +26,8 @@ public class BlockRope extends Block {
 	public static final BooleanProperty ANCHOR = BooleanProperty.create("anchor");
 	public static final BooleanProperty EXTENDED = Properties.EXTENDED;
 
-	public BlockRope(Builder builder) {
-		super(builder);
+	public BlockRope(Settings settings) {
+		super(settings);
 		this.setDefaultState(this.getStateFactory().getDefaultState().with(ANCHOR, false).with(EXTENDED, false));
 	}
 

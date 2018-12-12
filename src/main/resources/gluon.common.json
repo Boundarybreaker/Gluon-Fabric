@@ -2,6 +2,7 @@
   "required": true,
   "package": "space.bbkr.gluon.mixins",
   "compatibilityLevel": "JAVA_8",
+  "refmap": "mixins.gluon.refmap.json",
   "mixins": [
       "MixinLoomContainer",
       "MixinBannerTooltip",

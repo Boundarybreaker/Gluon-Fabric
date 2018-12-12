@@ -9,8 +9,8 @@ import net.minecraft.world.World;
 
 public class ItemTitleScroll extends Item {
 
-	public ItemTitleScroll(Builder properties) {
-		super(properties);
+	public ItemTitleScroll(Settings settings) {
+		super(settings);
 	}
 
 

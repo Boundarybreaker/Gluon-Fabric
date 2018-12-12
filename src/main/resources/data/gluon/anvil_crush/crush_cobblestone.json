@@ -1,0 +1,8 @@
+{
+  "ingredient": {
+    "block": "minecraft:stone"
+  },
+  "result_block": {
+    "block": "minecraft:cobblestone"
+  }
+}
