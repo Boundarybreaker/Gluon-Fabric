@@ -6,7 +6,6 @@
   "mixins": [
       "MixinLoomContainer",
       "MixinBannerTooltip",
-      "MixinPlayerEntity",
       "MixinJelliedFood"
   ],
   "injectors": {

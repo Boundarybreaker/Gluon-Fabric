@@ -26,22 +26,25 @@ public class MixinJelliedFood extends Item {
 
 	@Inject(method = "onItemFinishedUsing",
 			at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;getHungerManager()Lnet/minecraft/entity/player/HungerManager;"),
-			locals = LocalCapture.CAPTURE_FAILEXCEPTION)
-	public void addJelliedSaturation(ItemStack food, World world, LivingEntity eater, CallbackInfoReturnable cir, PlayerEntity player) {
-		if (food.hasTag()) {
-			if (food.getTag().containsKey("jellied")) {
+//			locals = LocalCapture.CAPTURE_FAILEXCEPTION,
+			remap = false)
+	public void eatJelliedFood(ItemStack itemStack_1, World world_1, LivingEntity livingEntity_1, CallbackInfoReturnable<ItemStack> cir) {
+		if (itemStack_1.hasTag()) {
+			if (itemStack_1.getTag().containsKey("jellied")) {
+				PlayerEntity player = (PlayerEntity)livingEntity_1;
 				player.getHungerManager().add(2, 0.5f);
 			}
 		}
 	}
 
 	@Override
-	public void addInformation(ItemStack stack, World world, List<TextComponent> tooltips, TooltipOptions tooltipOptions) {
+	public void buildTooltip(ItemStack stack, World world, List<TextComponent> tooltips, TooltipOptions tooltipOptions) {
 		if (stack.hasTag())  {
 			if (stack.getTag().containsKey("jellied")) {
 				tooltips.add(new TranslatableTextComponent("tooltip.gluon.jellied").applyFormat(TextFormat.GRAY));
 			}
 		}
-		super.addInformation(stack, world, tooltips, tooltipOptions);
+		super.buildTooltip(stack, world, tooltips, tooltipOptions);
 	}
+
 }

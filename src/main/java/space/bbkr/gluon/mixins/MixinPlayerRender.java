@@ -1,5 +1,6 @@
 package space.bbkr.gluon.mixins;
 
+import me.elucent.earlgray.api.TraitHolder;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.EntityRenderer;
@@ -8,7 +9,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import space.bbkr.gluon.ITitle;
+import space.bbkr.gluon.Gluon;
 
 @Mixin(PlayerEntityRenderer.class)
 public abstract class MixinPlayerRender extends EntityRenderer {
@@ -17,13 +18,12 @@ public abstract class MixinPlayerRender extends EntityRenderer {
 	}
 
 	@Inject(method = "method_4213", at = @At("HEAD"))
-	public void renderTitle(AbstractClientPlayerEntity p_renderEntityName_1_, double p_renderEntityName_2_, double p_renderEntityName_4_, double p_renderEntityName_6_, String p_renderEntityName_8_, double p_renderEntityName_9, CallbackInfo ci) {
-		if (hasTitle((ITitle) p_renderEntityName_1_)) {
-			this.renderEntityLabel(p_renderEntityName_1_, ((ITitle) p_renderEntityName_1_).getTitle().toString(), p_renderEntityName_2_, p_renderEntityName_4_, p_renderEntityName_6_, 64);
-		}
-	}
+	public void renderTitle(AbstractClientPlayerEntity abstractClientPlayerEntity_1, double double_1, double double_2, double double_3, String string_1, double double_4, CallbackInfo ci) {
+		if (((TraitHolder) abstractClientPlayerEntity_1).getTraits().hasTrait(Gluon.TITLE)) {
+			System.out.println("Trait found!");
+			if (!((TraitHolder)abstractClientPlayerEntity_1).getTraits().getTrait(Gluon.TITLE).getValue().equals(""))
 
-	private boolean hasTitle(ITitle title) {
-		return title.getTitle() != null && !title.getTitle().equals("");
+			this.renderEntityLabel(abstractClientPlayerEntity_1, (((TraitHolder) abstractClientPlayerEntity_1).getTraits().getTrait(Gluon.TITLE).getValue()), double_1, double_2, double_3, 64);
+		}
 	}
 }

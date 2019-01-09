@@ -50,7 +50,7 @@ public class BlockRope extends Block {
 	@Override
 	public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
 		if (entity instanceof ItemEntity) return;
-		if (entity.field_5976) { //TODO: find out what this actually is
+		if (entity.horizontalCollision) {
 			entity.velocityY = 0.35;
 		} else if (entity.isSneaking()) {
 			entity.velocityY = 0.08; //Stop, but also counteract EntityLivingBase-applied microgravity
@@ -73,13 +73,13 @@ public class BlockRope extends Block {
 
 
 	@Override
-	public BlockState getRenderingState(BlockState state, Direction facing, BlockState newState, IWorld world, BlockPos pos, BlockPos posFrom) {
+	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState newState, IWorld world, BlockPos pos, BlockPos posFrom) {
 		if (!state.canPlaceAt(world, pos) || !state.get(EXTENDED)) {
 			world.getBlockTickScheduler().schedule(pos, this, 2);
-			return super.getRenderingState(state, facing, newState, world, pos, posFrom);
+			return super.getStateForNeighborUpdate(state, facing, newState, world, pos, posFrom);
 		}
 
-		return super.getRenderingState(state, facing, newState, world, pos, posFrom);
+		return super.getStateForNeighborUpdate(state, facing, newState, world, pos, posFrom);
 	}
 
 	public void scheduledTick(BlockState state, World world, BlockPos pos, Random rand) {
@@ -91,8 +91,7 @@ public class BlockRope extends Block {
 			world.setBlockState(pos, state.with(EXTENDED, true));
 		}
 	}
-
-
+	
 	@Override
 	public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
 		world.getBlockTickScheduler().schedule(pos, this, 2);

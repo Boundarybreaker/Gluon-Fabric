@@ -23,16 +23,24 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 archivesBaseName = "gluon"
-version = "18w49a-1.0"
+version = "18w50a-1.0"
 
 minecraft {
 	refmapName = 'mixins.gluon.refmap.json'
 }
 
+repositories {
+	flatDir {
+		// here until I find the earlgray maven
+		dirs 'libs'
+	}
+}
+
 dependencies {
 	minecraft "com.mojang:minecraft:18w50a"
-	mappings "net.fabricmc:yarn:18w50a.2"
-	modCompile "net.fabricmc:fabric-loader:0.2.0.64"
-	modCompile "net.fabricmc:fabric:0.1.1.47"
+	mappings "net.fabricmc:yarn:18w50a.68"
+	modCompile "net.fabricmc:fabric-loader:0.3.0.74"
+	modCompile "net.fabricmc:fabric:0.1.2.63"
 	implementation 'org.jetbrains:annotations:15.0'
+	modCompile name: "earlgray-0.2"
 }

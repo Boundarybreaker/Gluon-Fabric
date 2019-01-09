@@ -1,7 +1,6 @@
 package space.bbkr.gluon.AnvilCrusher;
 
 import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
 import net.minecraft.block.Block;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
@@ -15,7 +14,7 @@ public class AnvilCrushSerializer {
 
 	public static AnvilCrush read(Identifier id, JsonObject json) {
 		BlockIngredient input;
-		if (JsonHelper.isArray(json, "ingredient")) {
+		if (JsonHelper.hasArray(json, "ingredient")) {
 			input = BlockIngredient.fromJson(JsonHelper.getArray(json, "ingredient"));
 		} else {
 			input = BlockIngredient.fromJson(JsonHelper.getObject(json, "ingredient"));
